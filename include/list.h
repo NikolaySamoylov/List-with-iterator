@@ -128,7 +128,7 @@ public:
 		else
 		{
 			Node<T>* del = pos->pNext;
-			pos->pNext = del;
+			pos->pNext = del->pNext;
 			delete del;
 			size--;
 		}
@@ -140,10 +140,10 @@ public:
 		Node<T>* current;
 	public:
 		// конструктор без параметров
-		Iterator() { current = first; }
-		//конструктор с параметром
+		Iterator() { current = NULL; }
+		// конструктор с параметром
 		Iterator(Node<T>* node) { current = node; }
-		//конструктор копирования
+		// конструктор копирования
 		Iterator(const Iterator& i) { current = i.current; }
 		// разыменование 
 		Node<T>*& operator*() { return current; }

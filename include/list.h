@@ -32,12 +32,15 @@ public:
 	List(const List<T>& l)
 	{
 		first = NULL;
-		size = l.size;
-		Node<T>* copier = l.first;
-		while (copier != NULL)
+		size = 0;
+		Iterator copier = begin();
+		for (Iterator it = l.begin(); it != l.end(); it++)
 		{
-			push_back(copier->data);
-			copier = copier->pNext;
+			insert(*copier, it->data);
+			if (copier != NULL)
+				copier++;
+			else
+				copier = begin();
 		}
 	}
 	// деструктор

@@ -14,15 +14,37 @@ void merge(List<T>& l1, List<T>& l2, List<T>& res)
 		throw "Lists are empty!";
 	List<T>::Iterator i = l1.begin();
 	List<T>::Iterator j = l2.begin();
+	List<T>::Iterator k = res.begin();
+	if (k != NULL)
+		while (k->pNext != NULL)
+			k = k->pNext;
 	while (i != l1.end() && j != l2.end())
 		if (i->data < j->data)
-			res.push_back((i++)->data);
+		{
+			res.insert(*k, (i++)->data);
+			if (k != NULL)
+				k++;
+			else
+				k = res.begin();
+		}
 		else
-			res.push_back((j++)->data);
+		{
+			res.insert(*k, (j++)->data);
+			if (k != NULL)
+				k++;
+			else
+				k = res.begin();
+		}
 	while (i != l1.end())
-		res.push_back((i++)->data);
+	{
+		res.insert(*k, (i++)->data);
+		k++;
+	}
 	while (j != l2.end())
-		res.push_back((j++)->data);
+	{
+		res.insert(*k, (j++)->data);
+		k++;
+	}
 }
 
 int main()
